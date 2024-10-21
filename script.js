@@ -1,15 +1,34 @@
-const one = document.querySelector('.one');
-const two = document.querySelector('.two');
-const three = document.querySelector('.three');
-const four = document.querySelector('.four');
-const five = document.querySelector('.five');
-const six = document.querySelector('.per').addEventListener("click",() => {
-    
-});
-let dis = document.querySelector(".dis-col");
-let count = 0;
-console.log("+" == "+" |  "+" == "-");
 
+let dis = document.querySelector(".dis-col"); //display-result
+let count = 0;
+
+// To display Numbers
+function getInput(value){
+    const input = value;
+    dis.innerText = dis.innerText + value;
+}
+
+// Percentage Operator
+const six = document.querySelector('.per').addEventListener("click",() => {
+    let inputVal = dis.innerText.split("");
+    let input_one,percent;
+    console.log(inputVal);
+    if(inputVal.includes("*")){
+        for(let i=0;i<=inputVal.length;i++){
+            if(inputVal[i] == "*"){
+                input_one = inputVal.slice(0,i).reduce((accumulator,current) => accumulator+current);
+                percent = (inputVal.slice(i+1,inputVal.length-1).reduce((accumulator,current) => accumulator+current))/100;
+            }
+        }
+    }
+    else{
+        dis.innerText = "0";
+    }
+    doCalc([input_one,percent],"%");
+});
+
+
+// Addition Operator
 const seven = document.querySelector('.add').addEventListener("click",() => {
     dis.innerText = dis.innerText + "+";
     count = count + 1;
@@ -26,21 +45,23 @@ const seven = document.querySelector('.add').addEventListener("click",() => {
             mid = inputArr[i];
             input_one = inputArr.slice(0,i).reduce((accumulator,current) => accumulator+current);
             console.log(input_one);
-            input_two = inputArr.slice(i+1,(inputArr.length-1)).reduce((accumulator,current) => accumulator+current);
-            console.log(input_two);
+            if(inputArr[i+1]){
+                input_two = inputArr.slice(i+1,(inputArr.length-1)).reduce((accumulator,current) => accumulator+current);
+                
+            }
+            else{
+                input_two = "0";
+            }
+            console.log(input_two,"input2");
             break;
         }
     }
-    console.log(input_one,"jyfh")
     dis.innerText = doCalc([input_one,input_two],mid) + finalVal;
-    console.log(inputVal.slice(0,2),"three");
-    console.log(doCalc(inputVal.slice(0,2),"+"));
-
    }
    
 });
 
-
+// Subtraction Operator
 const eight = document.querySelector('.sub').addEventListener("click",() => {
     dis.innerText = dis.innerText + "-";
     count = count + 1;
@@ -55,19 +76,22 @@ const eight = document.querySelector('.sub').addEventListener("click",() => {
         if((inputArr[i] == "+") || (inputArr[i] == "-") || (inputArr[i] == "*") || (inputArr[i] == "/") ){
             mid = inputArr[i];
             input_one = inputArr.slice(0,i).reduce((accumulator,current) => accumulator+current);
-            console.log(input_one);
-            input_two = inputArr.slice(i+1,(inputArr.length-1)).reduce((accumulator,current) => accumulator+current);
-            console.log(input_two);
+            if(inputArr[i+1]){
+                input_two = inputArr.slice(i+1,(inputArr.length-1)).reduce((accumulator,current) => accumulator+current);
+            }
+            else{
+                input_two = "0";
+            }
             break;
         }
     }
-    console.log(input_one,"jyfh",input_two,mid)
     dis.innerText = doCalc([input_one,input_two],mid) + finalVal;
-    console.log(dis.innerText);
    }
    
 });
 
+
+// Multiplication Operator
 const nine = document.querySelector('.mul').addEventListener("click",() => {
     dis.innerText = dis.innerText + "*";
     count = count + 1;
@@ -81,20 +105,22 @@ const nine = document.querySelector('.mul').addEventListener("click",() => {
         if((inputArr[i] == "+") || (inputArr[i] == "-") || (inputArr[i] == "*") || (inputArr[i] == "/") ){
             mid = inputArr[i];
             input_one = inputArr.slice(0,i).reduce((accumulator,current) => accumulator+current);
-            console.log(input_one);
-            input_two = inputArr.slice(i+1,(inputArr.length-1)).reduce((accumulator,current) => accumulator+current);
-            console.log(input_two);
+            if(inputArr[i+1]){
+                input_two = inputArr.slice(i+1,(inputArr.length-1)).reduce((accumulator,current) => accumulator+current);
+            }
+            else{
+                input_two = "1";
+            }
             break;
         }
     }
-    console.log(input_one,"jyfh")
     dis.innerText = doCalc([input_one,input_two],mid) + finalVal;
-
    }
    
 });
 
 
+// Division Operator
 const zero = document.querySelector('.div').addEventListener("click",() => {
     dis.innerText = dis.innerText + "/";
     count = count + 1;
@@ -108,67 +134,24 @@ const zero = document.querySelector('.div').addEventListener("click",() => {
         if((inputArr[i] == "+") || (inputArr[i] == "-") || (inputArr[i] == "*") || (inputArr[i] == "/") ){
             mid = inputArr[i];
             input_one = inputArr.slice(0,i).reduce((accumulator,current) => accumulator+current);
-            console.log(input_one);
-            input_two = inputArr.slice(i+1,(inputArr.length-1)).reduce((accumulator,current) => accumulator+current);
-            console.log(input_two);
+            if(inputArr[i+1]){
+                input_two = inputArr.slice(i+1,(inputArr.length-1)).reduce((accumulator,current) => accumulator+current);
+            }
+            else{
+                input_two = "1";
+            }
             break;
         }
     }
-    console.log(input_one,"jyfh")
     dis.innerText = doCalc([input_one,input_two],mid) + finalVal;
    }
     
 });
 
-const numbers = ['one','two','three','four','five','six','seven','eight','nine','zero'];
 
 
-
-
-/*
-one.addEventListener("click", e => {
-    dis.innerText = one.innerText;
-});
-two.addEventListener("click", e => {
-    dis.innerText = two.innerText;
-});
-three.addEventListener("click",e => {
-    dis.innerText = three.innerText;
-});
-four.addEventListener("click",e => {
-    dis.innerText = four.innerText;
-});
-five.addEventListener("click",e => {
-    dis.innerText = five.innerText;
-});
-six.addEventListener("click",e => {
-    dis.innerText = six.innerText;
-});
-seven.addEventListener("click",e => {
-    dis.innerText = seven.innerText;
-});
-eight.addEventListener("click",e => {
-    dis.innerText = eight.innerText;
-});
-nine.addEventListener("click",e => {
-    dis.innerText = nine.innerText;
-});
-zero.addEventListener("click",e => {
-    dis.innerText = two.innerText;
-});*/
-
-
-
-function getInput(value){
-    const input = value;
-    dis.innerText = dis.innerText + value;
-    console.log(input);
-}
-
-
-
+// Enter Button
 function startCalc(){
-    console.log("dine")
     const inputArr = dis.innerText.split("");
     const finalVal = inputArr[(inputArr.length)-1];
     let mid;
@@ -177,27 +160,28 @@ function startCalc(){
         if((inputArr[i] == "+") || (inputArr[i] == "-") || (inputArr[i] == "*") || (inputArr[i] == "/") ){
             mid = inputArr[i];
             input_one = inputArr.slice(0,i).reduce((accumulator,current) => accumulator+current);
-            console.log(input_one);
-            if(i+1 == inputArr.length-1){
+            if(inputArr[i+1] == inputArr[inputArr.length-1]){
                 input_two = inputArr[i+1];
             }
             else{
-                input_two = inputArr.slice(i+1,(inputArr.length-1)).reduce((accumulator,current) => accumulator+current);
+                input_two = inputArr.slice(i+1,(inputArr.length)).reduce((accumulator,current) => accumulator+current);
+                if(input_two.includes("%")){
+                    let value = input_two.split("%");
+                    value.pop();
+                    doCalc([input_one,value],"%")
+                }
             }
-            console.log(input_two,"four");
             break;
         }
     }
-    console.log(input_one,"jyfh",mid)
     dis.innerText = doCalc([input_one,input_two],mid);
-   
 }
 
 
+//To result
 function doCalc(input,operator){
     if(operator == "+"){
         let result = input.reduce((accumulator,current) =>Number(accumulator) + Number(current));
-        /*dis.innerText = result;*/
         return result;
     }
     else if(operator == "-"){
@@ -211,25 +195,28 @@ function doCalc(input,operator){
     }
     else if(operator == "/"){
         let result = input.reduce((accumulator,current) =>Number(accumulator) / Number(current));
-        dis.innerText = result;
         return result;
     }
     else if(operator == "%"){
-        let result = input.reduce((accumulator,current) =>Number(accumulator) % Number(current));
+        let result = input[0] * input[1];
         dis.innerText = result;
     }   
 }
 
+
+//To clear display
 function getClear(){
     dis.innerText = "0";
 }
 
+//To delete
 function clearLastChar(){
     const inputVal = dis.innerText.split("");
-    console.log(inputVal.pop());
+    inputVal.pop()
     dis.innerText = inputVal.join("");
 }
 
+//To power-off
 function powerOff(){
     dis.innerText = " ";
 }
